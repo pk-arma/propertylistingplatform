@@ -6,7 +6,7 @@ import PropertyList from "../components/server/PropertyList";
 export default function ProductsPage({
   searchParams,
 }: {
-  searchParams: { location?: string };
+  searchParams: { location?: string | undefined;};
 }) {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
