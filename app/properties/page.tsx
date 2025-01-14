@@ -1,6 +1,6 @@
 import PropertyList from "../components/server/PropertyList";
 import { searchProperties } from "../lib/actions";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default async function ProductsPage({
   searchParams,
@@ -8,25 +8,15 @@ export default async function ProductsPage({
   searchParams: Promise<{ location?: string; page?: string }>;
 }) {
   // Wait for searchParams to resolve
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const router = useRouter();
   const { location = "", page = "1" } = await searchParams;
 
   // Fetch properties based on location and page
-  const properties = await searchProperties(location, parseInt(page, 10),1);
+  const properties = await searchProperties(location, 1, parseInt(page, 10));
 
-  // Pagination controls
-  const handleNext = () => {
-    const nextPage = parseInt(page, 10) + 1;
-    router.push(`/properties?location=${location}&page=${nextPage}`);
-  };
-
-  const handlePrevious = () => {
-    const prevPage = Math.max(parseInt(page, 10) - 1, 1);
-    router.push(`/properties?location=${location}&page=${prevPage}`);
-  };
-
- 
+  // Parse page number for pagination
+  const currentPage = parseInt(page, 10);
+  const nextPage = currentPage + 1;
+  const prevPage = Math.max(currentPage - 1, 1);
 
   return (
     <div>
@@ -46,11 +36,15 @@ export default async function ProductsPage({
 
       {/* Pagination */}
       <div className="pagination">
-        <button onClick={handlePrevious} disabled={parseInt(page, 10) === 1}>
-          Previous
-        </button>
-        <span>Page {page}</span>
-        <button onClick={handleNext}>Next</button>
+        {/* Previous Page Link */}
+        <Link href={`/properties?location=${location}&page=${prevPage}`}>
+          <button disabled={currentPage === 1}>Previous</button>
+        </Link>
+        <span>Page {currentPage}</span>
+        {/* Next Page Link */}
+        <Link href={`/properties?location=${location}&page=${nextPage}`}>
+          <button>Next</button>
+        </Link>
       </div>
     </div>
   );
