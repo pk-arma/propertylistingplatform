@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import PropertyList from "../components/server/PropertyList";
 
-
-export default function ProductsPage() {
+export default function ProductsPage({
+  searchParams,
+}: {
+  searchParams: { location?: string };
+}) {
   const [products, setProducts] = useState([]);
-  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -37,8 +39,8 @@ export default function ProductsPage() {
   };
 
   useEffect(() => {
-    fetchProducts(query, page);
-  }, [query, page]);
+    fetchProducts(searchParams.location||"", page);
+  }, [searchParams?.location, page]);
 
   const handleNext = () => {
     setPage((prevPage) => prevPage + 1);
@@ -48,27 +50,18 @@ export default function ProductsPage() {
     if (page > 1) setPage((prevPage) => prevPage - 1);
   };
 
-  const handleSearch = () => {
-    setPage(1);
-    fetchProducts(query, 1);
-  };
+
 
   return (
     <div>
-      <h1>Products</h1>
+      <h1>Products List</h1>
 
-      <div>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search products"
-          style={{color:'black'}}
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <div className="loading-skeleton">
+  <div className="loading-card"></div>
+  <div className="loading-card"></div>
+  <div className="loading-card"></div>
+</div>}
       {error && <p>{error}</p>}
 
       <div>

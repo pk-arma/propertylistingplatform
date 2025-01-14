@@ -6,6 +6,7 @@ interface FilterPanelProps {
   onFilter: (filters: Record<string, string>) => void;
 }
 
+
 export function FilterPanel({ onFilter }: FilterPanelProps) {
   const [location, setLocation] = useState("");
 

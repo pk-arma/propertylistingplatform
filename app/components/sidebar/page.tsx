@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { HiHome } from "react-icons/hi";
+import { LuTableProperties } from "react-icons/lu";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true); // State to toggle sidebar visibility
@@ -33,8 +35,8 @@ export default function Sidebar() {
                 href="/"
                 className="flex items-center gap-4 px-4 py-2 hover:bg-gray-700 rounded"
               >
-                
-                {isOpen && <span>Home</span>}
+                <span className="material-icons">home</span>
+                {isOpen && <span><HiHome/> </span>}
               </Link>
             </li>
             <li>
@@ -42,8 +44,8 @@ export default function Sidebar() {
                 href="/properties"
                 className="flex items-center gap-4 px-4 py-2 hover:bg-gray-700 rounded"
               >
-                <span className="material-icons">business</span>
-                {isOpen && <span>Properties</span>}
+                <span className="material-icons">Properties</span>
+                {isOpen && <span><LuTableProperties/></span>}
               </Link>
             </li>
             <li>
