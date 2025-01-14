@@ -3,6 +3,7 @@
 const limit = 10;
 export  const searchProperties = async (searchQuery: string, page: number,id:number) => {
   try {
+
     const skip = (page - 1) * limit;
     const url = searchQuery
       ? `https://dummyjson.com/products/search?q=${encodeURIComponent(
