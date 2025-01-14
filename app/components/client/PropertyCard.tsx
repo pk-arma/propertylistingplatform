@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Property } from "../../lib/types";
 
 interface PropertyCardProps {
