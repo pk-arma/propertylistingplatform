@@ -1,13 +1,13 @@
-import PropertyList from "@/app/components/server/PropertyList";
-import { searchProperties } from "../../lib/actions";
+import { getServerSideProps } from "next/dist/build/templates/pages";
+type Props = Awaited<ReturnType<typeof getServerSideProps>>['searchParams']
 
 
-export default async function PropertySearchPage({ searchParams }: { searchParams: string }) {
-  const properties = await searchProperties(searchParams);
+export default async function PropertySearchPage({ searchParams }: Props ) {
+   console.log("searchParams",searchParams)
   return (
     <div>
       <h1>Search Results</h1>
-      <PropertyList properties={properties} />
+      {/* <PropertyList properties={properties} /> */}
     </div>
   );
 }

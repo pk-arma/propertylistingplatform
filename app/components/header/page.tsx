@@ -15,8 +15,15 @@ export default function Header() {
   return (
     <header className="header">
       <nav>
+        <div className="flex ">
+        <div className="m-3 border-solid border-2 border-wight-500">
         <Link href="/">Home</Link>
+        </div>
+        <div className="m-3 border-solid border-2 border-wight-500">
         <Link href="/properties">Properties</Link>
+        </div>
+        </div>
+
       </nav>
       <div>
         <input
