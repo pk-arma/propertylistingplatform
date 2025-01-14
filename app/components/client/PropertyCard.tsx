@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"; // Correct import for Next.js 13+
 import { Property } from "../../lib/types";
+import Image from "next/image";
 
 interface PropertyCardProps {
   data: Property;
@@ -31,10 +32,10 @@ export function PropertyCard({ data }: PropertyCardProps) {
       }}
     >
       {/* Display property image */}
-      <img
+      <Image
         src={data.images[0]} // Assuming data.images[0] always exists
-        width={200}
-        height={100}
+        width={400}
+        height={200}
         alt={data.title}
         style={{ borderRadius: "8px", marginBottom: "8px" }}
       />

@@ -3,7 +3,7 @@ import PropertyList from "./PropertyList";
 
 export default async function PropertySearchPage({ searchParams }: { searchParams: string }) {
 
-  const properties = await searchProperties(searchParams);
+  const properties = await searchProperties(searchParams,1,1);
 
   return (
     <div>
