@@ -6,7 +6,7 @@ import PropertyList from "../components/server/PropertyList";
 export default function ProductsPage({
   searchParams,
 }: {
-  searchParams: { location?: string | undefined;};
+  searchParams: { location?: string };
 }) {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -14,7 +14,7 @@ export default function ProductsPage({
   const [error, setError] = useState('');
 
   const limit = 10;
-
+  const location = searchParams?.location || "default-location";
   const fetchProducts = async (searchQuery: string, page: number) => {
     setLoading(true);
     setError('');
@@ -39,8 +39,8 @@ export default function ProductsPage({
   };
 
   useEffect(() => {
-    fetchProducts(searchParams.location||"", page);
-  }, [searchParams?.location, page]);
+    fetchProducts(location||"", page);
+  }, [location, page]);
 
   const handleNext = () => {
     setPage((prevPage) => prevPage + 1);
