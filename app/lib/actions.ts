@@ -1,7 +1,7 @@
 "use server";
 
 const limit = 10;
-export  const searchProperties = async (searchQuery: string, page: number,id:number) => {
+export  const searchProperties = async (searchQuery: string, page: number,id:number|undefined) => {
   try {
 
     const skip = (page - 1) * limit;

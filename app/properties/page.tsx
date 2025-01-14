@@ -1,6 +1,8 @@
+
+
 import PropertyList from "../components/server/PropertyList";
 import { searchProperties } from "../lib/actions";
-import Link from "next/link";
+import Pagination from "./pagination/page";
 
 export default async function ProductsPage({
   searchParams,
@@ -8,16 +10,12 @@ export default async function ProductsPage({
   searchParams: Promise<{ location?: string; page?: string }>;
 }) {
   // Wait for searchParams to resolve
-  const { location = "", page = "1" } = await searchParams;
+  const { location = "",page=1 } = await searchParams;
 
   // Fetch properties based on location and page
-  const properties = await searchProperties(location, 1, parseInt(page, 10));
-
-  // Parse page number for pagination
-  const currentPage = parseInt(page, 10);
-  const nextPage = currentPage + 1;
-  const prevPage = Math.max(currentPage - 1, 1);
-
+  const currentPage = Number(page)
+  const properties = await searchProperties(location, 1,currentPage);
+ console.log('properties',properties?.products)
   return (
     <div>
       <h1>Products List</h1>
@@ -31,20 +29,12 @@ export default async function ProductsPage({
 
       {/* Property List */}
       <div>
-        <PropertyList properties={properties} />
+        <PropertyList properties={properties?.products} />
       </div>
 
       {/* Pagination */}
       <div className="pagination">
-        {/* Previous Page Link */}
-        <Link href={`/properties?location=${location}&page=${prevPage}`}>
-          <button disabled={currentPage === 1}>Previous</button>
-        </Link>
-        <span>Page {currentPage}</span>
-        {/* Next Page Link */}
-        <Link href={`/properties?location=${location}&page=${nextPage}`}>
-          <button>Next</button>
-        </Link>
+        <Pagination totalItems={properties?.products.length} itemsPerPage={properties?.page} currentPage={currentPage}/>
       </div>
     </div>
   );
