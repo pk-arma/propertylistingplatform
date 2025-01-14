@@ -2,7 +2,7 @@
 
 import PropertyList from "../components/server/PropertyList";
 import { searchProperties } from "../lib/actions";
-import {Pagination} from "../components/pagination/page";
+import {Pagination} from "../components/pagination/Pagination";
 
 export default async function ProductsPage({
   searchParams,
