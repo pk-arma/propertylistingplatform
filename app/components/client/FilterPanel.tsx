@@ -12,8 +12,7 @@ export function FilterPanel({ onFilter }: FilterPanelProps) {
 
   const handleSearch = () => {
     if (location.trim() === "") {
-      alert("Please enter a location to search.");
-      return;
+      onFilter({});
     }
     onFilter({ location });
   };

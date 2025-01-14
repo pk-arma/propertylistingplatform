@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { searchProperties } from "../../lib/actions";
+import { searchByIdProperties } from "../../lib/actions";
 // Define the correct props type
 
 
@@ -10,7 +10,7 @@ import { searchProperties } from "../../lib/actions";
   params: Promise<{ id: number }>
 }) {
   const slug = (await params).id;
-  const property = await searchProperties("",1, Number(slug));
+  const property = await searchByIdProperties(Number(slug));
      console.log('res',property)
   if (!property) {
     return <div>Property not found</div>;

@@ -1,17 +1,26 @@
-// components/Pagination.js
 'use client'; // Ensures this is a Client Component
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-const Pagination = ({ totalItems, itemsPerPage, currentPage }) => {
+interface PaginationProps {
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+}
+
+export const Pagination: React.FC<PaginationProps> =  ({
+  totalItems,
+  itemsPerPage,
+  currentPage,
+}) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const handlePageChange = (page) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('page', page);
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set('page', page.toString());
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -59,5 +68,3 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage }) => {
     </div>
   );
 };
-
-export default Pagination;

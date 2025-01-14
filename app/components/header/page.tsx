@@ -10,7 +10,12 @@ export default function Header() {
   // Updated `handleSearch` function for better readability and type safety
   const handleSearch = (filters: Record<string, string>) => {
     const query = new URLSearchParams(filters).toString();
-    router.push(`/properties?${query}`);
+    if(query){
+      router.push(`/properties?${query}`);
+    }else{
+      router.push(`/properties`);
+
+    }
   };
 
   return (
